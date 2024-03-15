@@ -51,15 +51,15 @@ fi
 echo -e "On system: $SYSTEM"
 
 if [[ $PULL -eq 1 ]]; then
-    if [[ $BRANCH != "master" ]]; then
-        echo -e "${RED}Not on master, not pulling latest git changes${CLEAR}\n"
+    if [[ $BRANCH != "cerberus-1.0.0" ]]; then
+        echo -e "${RED}Not on cerberus-1.0.0, not pulling latest git changes${CLEAR}\n"
     else
         echo -e "Pulling git changes"
         git pull
     fi
 
     echo -e "Downloading latest images"
-    docker-compose -f ./docker/compose.yml pull $SERVICE_NAME $TENV_REGTEST
+    sudo docker compose -f ./docker/compose.yml pull $SERVICE_NAME $TENV_REGTEST
 fi
 
 echo -e "Setup xhost for video device output"
@@ -83,4 +83,4 @@ else
 fi
 
 # launch trezor-user-env
-docker-compose -f ./docker/compose.yml up --force-recreate $SERVICE_NAME $TENV_REGTEST
+sudo docker compose -f ./docker/compose.yml up --force-recreate $SERVICE_NAME $TENV_REGTEST
